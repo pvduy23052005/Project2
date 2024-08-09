@@ -1,0 +1,80 @@
+extends ../../layout/default.pug
+block main 
+
+   form(id="form-search")
+      input(
+         type = "text"
+         placeholder = "Nhap tu khoa"
+         name = "keyword"
+         value = keyword
+      ) 
+      button(type ="submit") tim
+
+   each item in listButton   
+      button(
+         class =  item.class 
+         status-button = item.status 
+      )  #{item.name}
+
+   table 
+      thead 
+         tr 
+            td ten
+            td Trang trai
+
+      tbody
+         each item in product 
+            tr 
+               td #{item.TenSanPham}
+               td 
+                  if( item.status == "active")
+                     button(
+                        data-id = item._id 
+                        data-status = item.status
+                        button-change-status
+                     ) Hoat dong 
+                  else 
+                     button(
+                        data-id = item._id 
+                        data-status = item.status
+                        button-change-status 
+                     ) Khong hoat dong 
+
+   //- PHAN TRANG SAN PHAM . 
+   div 
+      ul(class ="pagination")
+         if(pagination.currentPage  > 1)
+            li(class = "page-item")
+               button(
+                  class = "page-link" 
+                  button-page = pagination.currentPage -1 
+               ) Trang tuoc
+         
+         -for( let i = 1 ;i <= pagination.soLuongPage ;i++)
+            li(class =`page-item ${pagination.currentPage == i ? "mau" : ""} `)
+               button(
+                  class = "page-link"
+                  button-page = i 
+               ) #{i}
+
+         if(pagination.currentPage < pagination.soLuongPage)
+               li(class = "page-item")
+                  button(
+                     class = "page-link" 
+                     button-page = pagination.currentPage +1 
+                  ) Trang sau
+
+   form(
+      action=""
+      method="get"
+      id = "form-change-status"
+      path = "/products/change-status"
+      )
+   //-nhung file . 
+   script(src="/admin/js/product.js") 
+
+      
+
+   
+
+         

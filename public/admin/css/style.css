@@ -1,0 +1,19 @@
+.mau{
+   background: greenyellow;
+}
+
+.pagination {
+   list-style-type: none; /* Loại bỏ các dấu đầu dòng của danh sách */
+   padding: 0;
+   /* text-align: center; Căn giữa các phần tử trong danh sách */
+}
+
+.pagination .page-item {
+   display: inline-block; /* Hiển thị các phần tử li cùng một dòng */
+   margin-right: 5px; /* Khoảng cách giữa các phần tử li */
+}
+
+.pagination .page-link {
+   padding: 5px 10px;
+   text-decoration: none;
+}

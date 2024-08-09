@@ -1,0 +1,15 @@
+doctype html 
+html 
+   head 
+      title #{pageTitle}
+
+      link(rel="stylesheet", href="/admin/css/style.css")
+   body
+
+      include  ../partials/header.pug
+      .body 
+         include ../partials/sider.pug
+         .main
+            block main 
+
+      script(src="/admin/js/script.js")
