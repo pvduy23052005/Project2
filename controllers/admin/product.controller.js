@@ -1,4 +1,4 @@
-// nhung model vao 
+ // nhung model vao 
 const product = require("../../model/product.model.js"); 
 const productHelper = require("../../helpers/products.js"); 
 const helperSearch = require("../../helpers/search.js")
@@ -46,6 +46,7 @@ module.exports.product = async (req, res) =>{
    }); 
 }
 
+// /change-status/:status/:id
 module.exports.changeStatus = async (req , res) =>{
    // su dung lop params lay cac url de gui len.
    
@@ -59,9 +60,26 @@ module.exports.changeStatus = async (req , res) =>{
       // su ham updateOne
       await product.updateOne({_id : id } , { status : status}); 
    } catch (error) {
-      
    }
 
    // su dung ham khong cho quay lai url qua 
    res.redirect("back"); 
 }
+
+module.exports.changeMulti = async ( req , res) => {
+   const type = req.query.type ; 
+   const listId  = req.query.ids.split(", "); 
+
+   switch (type) {
+      case "active":
+         await product.updateMany({ _id: { $in: listId } }, { status: "active" });
+         break;
+      case "inactive": 
+         await product.updateMany({ _id: { $in: listId } }, { status: "inactive" });
+      default:
+         break;
+   }
+   // khong quanh lai trang trc do . 
+   res.redirect("back"); 
+}
+

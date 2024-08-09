@@ -10,7 +10,8 @@ const productSchema = mongoose.Schema({
    hinhAnh: String,
    gia: Number,
    giam: Number, 
-   status : String 
+   status : String ,
+   position : Number
 }); 
 
 const product = mongoose.model("product" , productSchema , "products");

@@ -1,14 +1,33 @@
 extends ../../layout/default.pug
 block main 
 
-   form(id="form-search")
-      input(
-         type = "text"
-         placeholder = "Nhap tu khoa"
-         name = "keyword"
-         value = keyword
-      ) 
-      button(type ="submit") tim
+   //- Phan tim kie, . 
+   .form-tinh-nang
+      form(id="form-search")
+         input(
+            type = "text"
+            placeholder = "Nhap tu khoa"
+            name = "keyword"
+            value = keyword
+         ) 
+         button(type ="submit") tim
+
+      form(
+         action="products/change-multi" 
+         method="get"
+         form-change-multi 
+         )
+            select(name="type" class = "form-control") 
+               option(value="active") Hoat dong 
+               option(value="inactive") Ngung hoat dong 
+            input(
+               type="type"
+               value = ""
+               name = "ids"
+               class = "form-input"
+               )
+            button(type="submit" class ="btn") Ap dung  
+
 
    each item in listButton   
       button(
@@ -16,29 +35,50 @@ block main
          status-button = item.status 
       )  #{item.name}
 
-   table 
-      thead 
-         tr 
-            td ten
-            td Trang trai
 
-      tbody
-         each item in product 
+
+   .form-products
+      table(checkbox-multi)
+         thead 
             tr 
-               td #{item.TenSanPham}
-               td 
-                  if( item.status == "active")
-                     button(
-                        data-id = item._id 
-                        data-status = item.status
-                        button-change-status
-                     ) Hoat dong 
-                  else 
-                     button(
-                        data-id = item._id 
-                        data-status = item.status
-                        button-change-status 
-                     ) Khong hoat dong 
+               th 
+                  input(type="checkbox" name ="checkAll")
+               th  STT
+               th ten
+               th Hinh anh
+               th Trang trai
+               th Chinh sua 
+
+         tbody
+            each item, idx in product 
+               tr 
+                  td                           
+                     input(
+                        type="checkbox"
+                        name ="id"
+                        value = item._id
+                        )
+                  td #{idx + 1}
+                  td #{item.TenSanPham}
+                  td 
+                     img(src=item.hinhAnh width ="100px" , height ="100px")
+                  td 
+                     if( item.status == "active")
+                        button(
+                           data-id = item._id 
+                           data-status = item.status
+                           button-change-status
+                        ) Hoat dong 
+                     else 
+                        button(
+                           data-id = item._id 
+                           data-status = item.status
+                           button-change-status 
+                        ) Khong hoat dong 
+                  td  
+                     button( button-repair) Sua 
+                     button( button-delete) Xoa
+
 
    //- PHAN TRANG SAN PHAM . 
    div 
