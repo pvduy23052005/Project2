@@ -1,20 +1,21 @@
 const express = require("express"); 
+const methodOverride = require('method-override');
+const appAdmin = require("./routes/admin/index.route.js"); 
+const mongoose = require("./config/database.js"); 
+
 require("dotenv").config();  
 const app = express(); 
 const port = process.env.PORT;
 
+// goi de file ket noi database . 
+mongoose.connect(); 
 
 // cap quyen cho foder public . 
 app.use(express.static("public")); 
 
-const appAdmin = require("./routes/admin/index.route.js"); 
+app.use(methodOverride('_method')); 
+
 appAdmin(app); 
-
-// goi de file ket noi databse . 
-const mongoose = require("./config/database.js"); 
-mongoose.connect(); 
-
-
 app.listen(port , () => {
    console.log(`Run sever ${port}`); 
 });

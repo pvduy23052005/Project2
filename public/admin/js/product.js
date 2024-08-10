@@ -16,7 +16,8 @@ if(buttonChange.length > 0){
          // thay doi lai trang thai . 
          const newStatus = (dataStatus == "active" ? "inactive": "active"); 
 
-         const action = path + `/${newStatus}/${dataId}`
+         // gui bang method PATCH. 
+         const action = path + `/${newStatus}/${dataId}?_method=PATCH` ; 
          formChange.action = action ; 
          
          // gui khi an vao button . 

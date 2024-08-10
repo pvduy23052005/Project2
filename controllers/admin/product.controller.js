@@ -54,7 +54,6 @@ module.exports.changeStatus = async (req , res) =>{
    const id = req.params.id; 
    //lay ve status on url . 
    const status = req.params.status; 
-   console.log(id);
    
    try {
       // su ham updateOne
@@ -64,8 +63,7 @@ module.exports.changeStatus = async (req , res) =>{
 
    // su dung ham khong cho quay lai url qua 
    res.redirect("back"); 
-}
-
+} 
 module.exports.changeMulti = async ( req , res) => {
    const type = req.query.type ; 
    const listId  = req.query.ids.split(", "); 
