@@ -12,7 +12,9 @@ module.exports.product = async (req, res) =>{
    let objectSearch = helperSearch(req.query); 
    
    // lay data  . 
-   let find = {}
+   let find = {
+      hienThi : false  
+   }
    if(req.query.status){// neu status cua product khac rong . 
       find.status = req.query.status
    }
@@ -46,7 +48,7 @@ module.exports.product = async (req, res) =>{
    }); 
 }
 
-// /change-status/:status/:id
+// [patch]/change-status/:status/:id
 module.exports.changeStatus = async (req , res) =>{
    // su dung lop params lay cac url de gui len.
    
@@ -64,6 +66,7 @@ module.exports.changeStatus = async (req , res) =>{
    // su dung ham khong cho quay lai url qua 
    res.redirect("back"); 
 } 
+
 module.exports.changeMulti = async ( req , res) => {
    const type = req.body.type ; 
    const listId  = req.body.ids.split(", ");  
@@ -81,3 +84,12 @@ module.exports.changeMulti = async ( req , res) => {
    res.redirect("back"); 
 }
 
+module.exports.deleteItem = async ( req , res) => { 
+
+   // lay ve id terne url . 
+   const id = req.params.id ; 
+   // cap nhat lai truong hieThi . 
+   await product.updateOne( { _id : id} , { hienThi : true}); 
+
+   res.redirect("back"); 
+}

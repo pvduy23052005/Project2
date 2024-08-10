@@ -77,7 +77,10 @@ block main
                         ) Khong hoat dong 
                   td  
                      button( button-repair) Sua 
-                     button( button-delete) Xoa
+                     button( 
+                        button-delete
+                        data-id = item._id 
+                     ) Xoa
 
 
    //- PHAN TRANG SAN PHAM . 
@@ -104,6 +107,7 @@ block main
                      button-page = pagination.currentPage +1 
                   ) Trang sau
 
+   //- tinh nang thay doi 1 san pham . 
    form(
       action=""
       method="POST"
@@ -111,8 +115,14 @@ block main
       path = "/products/change-status"
       )
 
-
-
+   //- xoa 1 san pham . 
+   form(
+      action=""
+      method ="POST"
+      id = "form-change-item"
+      path = "/products/delete"
+      
+      ) 
 
    //-nhung file . 
    script(src="/admin/js/product.js") 

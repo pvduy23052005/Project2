@@ -96,3 +96,24 @@ if(formChange){
    }); 
 }
 
+// tinh nang xoa 1 pham . 
+// lay ve button xoa . 
+const buttonDelete = document.querySelectorAll("[button-delete]")
+if(buttonDelete ){
+   const formDelete = document.querySelector("#form-change-item"); 
+   const path = formDelete.getAttribute("path"); 
+   // duyet qua cac butotn . 
+   buttonDelete.forEach( (button) => { 
+      button.addEventListener("click" , () => { 
+         const check = confirm("Ban Co muon xoa!"); 
+         if( check) {
+            // lay ve id san pham . 
+            const id = button.getAttribute("data-id"); 
+            formDelete.action = path + `/${id}?_method=PATCH`
+            formDelete.submit();
+         }
+      }); 
+   }); 
+}
+
+
