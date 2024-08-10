@@ -37,7 +37,9 @@ module.exports.product = async (req, res) =>{
       countProduct 
    )
 
-   const data = await product.find(find).limit(objectPagination.limit)
+   const data = await product.find(find)
+   .sort({position : "desc"} )  // sap xep theo gian dan . 
+   .limit(objectPagination.limit)
    .skip(objectPagination.skip);
 
    res.render("admin/pages/products/index.pug" ,{
@@ -77,6 +79,17 @@ module.exports.changeMulti = async ( req , res) => {
          break;
       case "inactive": 
          await product.updateMany({ _id: { $in: listId } }, { status: "inactive" });
+      case "delete-item" : 
+         await product.updateMany( { _id: { $in: listId } }, { hienThi: true } );
+         break ; 
+      case "change-position": 
+         for( const item of listId){
+            const [id ,  position1] = item.split("-"); 
+            // chuyen tring -> int 
+            const position = parseInt(position1); 
+            await product.updateOne( { _id :  id } , {  position  : position } ); 
+         }
+         break ; 
       default:
          break;
    }

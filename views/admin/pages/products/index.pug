@@ -20,6 +20,8 @@ block main
             select(name="type" class = "form-control") 
                option(value="active") Hoat dong 
                option(value="inactive") Ngung hoat dong 
+               option(value= "delete-item") Xoa tat ca
+               option(value = "change-position") Thay doi vi tri 
             input(
                type="type"
                value = ""
@@ -62,6 +64,14 @@ block main
                   td #{item.TenSanPham}
                   td 
                      img(src=item.hinhAnh width ="100px" , height ="100px")
+                  td 
+                     input(
+                        type="number"
+                        value= item.position
+                        style = "width : 50px "
+                        min = "1"
+                        name = "position"
+                        )
                   td 
                      if( item.status == "active")
                         button(

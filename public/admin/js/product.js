@@ -72,16 +72,35 @@ if(formChange){
       event.preventDefault(); 
       // lay ve cac da check . 
       const count = table.querySelectorAll("input[name='id']:checked");
-
       // lay ra o input trong form . 
       const inputForm = formChange.querySelector("input[name='ids']"); 
 
+      //lay ra value cua input . 
+      const typeChange = event.target.elements.type.value ; 
+
+      if(typeChange === "delete-item"){
+         const check = confirm("Ban co muon xoa khong!");   
+         // neu an huy chay vao day . 
+         if( !check){
+            return ; 
+         }
+      }
       
       if(count.length > 0){
          let listId = []; 
-         count.forEach( (input) => { 
-            const id = input.value ; 
-            listId.push(id); 
+
+         count.forEach( (input) => {
+            const id = input.value ;
+            if(typeChange == "change-position"){
+               //lay ve position . 
+               const position = input
+                  .closest("tr")
+                  .querySelector("input[name='position']").value;
+               listId.push(`${id}-${position}`); 
+            }
+            else{
+               listId.push(id); 
+            }
          }); 
 
          const stringId = listId.join(", "); 
