@@ -65,8 +65,8 @@ module.exports.changeStatus = async (req , res) =>{
    res.redirect("back"); 
 } 
 module.exports.changeMulti = async ( req , res) => {
-   const type = req.query.type ; 
-   const listId  = req.query.ids.split(", "); 
+   const type = req.body.type ; 
+   const listId  = req.body.ids.split(", ");  
 
    switch (type) {
       case "active":

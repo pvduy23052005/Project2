@@ -13,8 +13,8 @@ block main
          button(type ="submit") tim
 
       form(
-         action="products/change-multi" 
-         method="get"
+         action="products/change-multi?_method=PATCH" 
+         method="POST"
          form-change-multi 
          )
             select(name="type" class = "form-control") 
