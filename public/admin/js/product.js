@@ -135,4 +135,20 @@ if(buttonDelete ){
    }); 
 }
 
+// tinh nang an hien . 
+const show = document.querySelector("[show-alert]");
+if( show){
+   // lay ve time 
+   const time = parseInt(show.getAttribute("time")); 
+   // lay ve close-alert 
+   const closeAlert = show.querySelector("[close-alert]"); 
+   setTimeout(() => { 
+      // an thong bao sau 5s
+      show.classList.add("alert-hidden"); 
+   }, time ); 
+
+   closeAlert.addEventListener("click" , () => { 
+      show.classList.add("alert-hidden")
+   }); 
+} 
 

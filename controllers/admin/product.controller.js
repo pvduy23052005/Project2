@@ -1,7 +1,7 @@
  // nhung model vao 
 const product = require("../../model/product.model.js"); 
 const productHelper = require("../../helpers/products.js"); 
-const helperSearch = require("../../helpers/search.js")
+const helperSearch = require("../../helpers/search.js");
 const helperPagination = require("../../helpers/pagination.js"); 
 
 module.exports.product = async (req, res) =>{
@@ -62,6 +62,7 @@ module.exports.changeStatus = async (req , res) =>{
    try {
       // su ham updateOne
       await product.updateOne({_id : id } , { status : status}); 
+      req.flash("thanhCong" , "Cap nhat Thanh cong"); 
    } catch (error) {
    }
 
@@ -76,11 +77,14 @@ module.exports.changeMulti = async ( req , res) => {
    switch (type) {
       case "active":
          await product.updateMany({ _id: { $in: listId } }, { status: "active" });
+         req.flash("thanhCong" , "Cap nhat Thanh cong"); 
          break;
       case "inactive": 
          await product.updateMany({ _id: { $in: listId } }, { status: "inactive" });
+         req.flash("thanhCong" , "Cap nhat Thanh cong"); 
       case "delete-item" : 
          await product.updateMany( { _id: { $in: listId } }, { hienThi: true } );
+         req.flash("thanhCong" , "Xoa thanh cong "); 
          break ; 
       case "change-position": 
          for( const item of listId){
@@ -88,6 +92,7 @@ module.exports.changeMulti = async ( req , res) => {
             // chuyen tring -> int 
             const position = parseInt(position1); 
             await product.updateOne( { _id :  id } , {  position  : position } ); 
+            req.flash("thanhCong" , "Cap nhat Thanh cong"); 
          }
          break ; 
       default:
@@ -103,6 +108,6 @@ module.exports.deleteItem = async ( req , res) => {
    const id = req.params.id ; 
    // cap nhat lai truong hieThi . 
    await product.updateOne( { _id : id} , { hienThi : true}); 
-
+   req.flash("thanhCong" , "Xoa thanh cong"); 
    res.redirect("back"); 
 }

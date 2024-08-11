@@ -1,6 +1,13 @@
 extends ../../layout/default.pug
 block main 
 
+   if( messages.thanhCong)
+      .info  
+         div(
+            show-alert 
+            time = 5000 
+         ) #{messages.thanhCong} <span close-alert> X </span>
+
    //- Phan tim kie, . 
    .form-tinh-nang
       form(id="form-search")

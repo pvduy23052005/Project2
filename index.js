@@ -3,6 +3,11 @@ const methodOverride = require('method-override');
 const appAdmin = require("./routes/admin/index.route.js"); 
 const mongoose = require("./config/database.js"); 
 const bodyParser = require("body-parser"); 
+//Fash : HIEN THI THONG BAO CHO  
+const flash = require("express-flash"); 
+const  cookieParser = require("cookie-parser"); 
+const session = require("express-session"); 
+
 require("dotenv").config();  
 
 
@@ -20,6 +25,11 @@ app.use(express.static("public"));
 
 // cau hinh cho method-override . 
 app.use(methodOverride('_method')); 
+
+// cau hinh cho fash
+app.use(cookieParser("PHUNGVANDUY")); 
+app.use(session({cookie:  { maxAge : 60000}})); 
+app.use(flash()); 
 
 appAdmin(app); 
 app.listen(port , () => {

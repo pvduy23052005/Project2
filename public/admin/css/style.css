@@ -21,3 +21,18 @@
 .form-products{
    border: 1px solid green;;
 }
+
+.alert-hidden{
+   display: none;
+   animation-name: alert-hidden;
+   background-color:white;
+}
+
+.info{
+   color: greenyellow;
+   display: inline-block;
+   font-size: 30px;
+   right: 15px;
+   z-index: 9999;
+   position: fixed;
+}
