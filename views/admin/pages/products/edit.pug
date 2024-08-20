@@ -1,0 +1,130 @@
+extend ../../layout/default.pug
+
+block main 
+
+
+   if( messages.thanhCong)
+      .info  
+         div(
+            show-alert 
+            time = 5000 
+         ) #{messages.thanhCong} <span close-alert> X </span>
+
+   if( messages.error)
+      .info  
+         div(
+            show-alert 
+            time = 5000 
+         ) #{messages.error} <span close-alert> X </span>
+         
+   form( 
+   action=`/admin/products/edit/${product._id}?_method=PATCH`  
+   id = "form-edit-products"
+   method = "POST"
+   enctype = "multipart/form-data"
+   )
+      div(class = "form-group")
+         label(for="TenSanPham") Tiêu đề
+         input(
+            type="text"
+            class ="form-control"
+            id = "TenSanPham"
+            name = "TenSanPham"
+            value = product.TenSanPham 
+            required
+         )
+
+      div(class = "form-group")
+         label(for="SoLuong") Số lượng
+         input(
+            type="number"
+            class ="form-control"
+            id = "SoLuong"
+            name = "SoLuong"
+            value = product.SoLuong
+            min ="0"
+         )
+
+      div(
+         class = "form-group"
+         upload-image
+         )
+         label(for="hinhAnh") Ảnh
+         input(
+            type="file"
+            class ="form-control"
+            id = "hinhAnh"
+            name = "hinhAnh"
+            accept = "image/*"
+            upload-image-input
+         )
+         img(
+            src= product.hinhAnh 
+            width = "100px" 
+            height = "100px" 
+            upload-image-preview 
+            )
+
+      div(class = "form-group")
+         label(for="gia") Giá
+         input(
+            type="number"
+            class ="form-control"
+            id = "gia"
+            name = "gia"
+            value = product.gia
+            min ="0"
+         )
+
+      div(class = "form-group")
+         label(for="discount") % Giảm
+         input(
+            type="number"
+            class ="form-control"
+            id = "discount"
+            name = "giam"
+            value =product.giam
+            min ="0"
+         )
+
+
+      div(for ="statusActive form-check form-check-inline")
+         input(
+            type = "radio"
+            class = "form-check-input"
+            id = "statusActive"
+            name = "status"
+            value = "active"
+            checked = ( product.status == 'active' ? true : false)
+         )
+         label(for = "statusActive" class = "form-check-label") Hoạt động
+      div(for ="statusActive form-check form-check-inline")
+         input(
+            type = "radio"
+            class = "form-check-input"
+            id = "statusInactive"
+            name = "status" 
+            value = "inactive"
+            checked = ( product.status == 'inactive' ? true  : false)
+         )
+         label(for = "statusInActive" class = "form-check-label") Dừng hoạt động
+
+      div(class = "form-group")
+         label(for="position") Ví trí
+         input(
+            type="number"
+            class ="form-control"
+            id = "position"
+            name = "position"
+            placeholder = "Tự động tăng"
+            min = "1"
+            value = product.position  
+         )
+
+      div(class ="form-group")
+         button(
+            type = "submit"
+            class = "btn btn-primary"
+         ) Cap nhat  
+
+   script(src="/admin/product.js") 

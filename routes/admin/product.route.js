@@ -24,4 +24,13 @@ router.post("/create" ,
    controller.createPost
 );
 
+//[get] /admin/product/edit/:id,
+router.get("/edit/:id" , controller.editGet); 
+
+router.patch("/edit/:id" ,
+   upload.single("hinhAnh"),
+   validate.createPost,
+   controller.editPatch
+); 
+
 module.exports = router;

@@ -98,7 +98,10 @@ block main
                            button-change-status 
                         ) Khong hoat dong 
                   td  
-                     button( button-repair) Sua 
+                     a( 
+                        href = `/admin/products/edit/${item._id}`
+                        data-id = item._id
+                        ) Sua 
                      button( 
                         button-delete
                         data-id = item._id 

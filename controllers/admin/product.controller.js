@@ -137,7 +137,7 @@ module.exports.createPost = async ( req , res) => {
    if( req.body.hinhAnh){
       req.body.hinhAnh =  `/uploads/${req.file.filename}`;
    }
-   
+
    try {
       const product = new Product(req.body); 
       await product.save(); 
@@ -148,3 +148,44 @@ module.exports.createPost = async ( req , res) => {
 
    res.redirect("/admin/products");
 }
+
+//[GET] /admin/product/edit/:id
+module.exports.editGet = async ( req , res) => {
+   try {
+      let find = {
+         hienThi : false , 
+         _id : req.params.id 
+      }
+      const product1 = await product.findOne(find); 
+      
+      res.render("admin/pages/products/edit.pug", {
+         pageTitle : "Chi tiet san pham ",
+         product : product1
+      }); 
+
+   } catch (error) {
+      res.redirect("/amin/products"); 
+   }
+}
+
+// [PATCH] . 
+module.exports.editPatch = async ( req , res) => { 
+   req.body.gia = parseInt(req.body.gia); 
+   req.body.giam = parseInt(req.body.giam); 
+   req.body.soLuong = parseInt(req.body.soLuong);
+   req.body.position = parseInt(req.body.position);
+
+   if(req.file){
+      // update anh . => database .  ( req.file). 
+   req.body.hinhAnh =  `/uploads/${req.file.filename}`;  
+   }
+
+   try {
+      await product.updateOne({ _id : req.params.id} , req.body);  
+   } catch (error) {
+      console.log("Loi"); 
+   }
+
+   res.redirect("back"); 
+}
+
