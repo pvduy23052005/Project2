@@ -11,4 +11,9 @@ router.patch("/change-multi" , controller.changeMulti);
 
 router.patch("/delete/:id" , controller.deleteItem); 
 
-module.exports = router; 
+// them moi 1 san pham . [get]
+router.get("/create" , controller.createGet); 
+
+router.post("/create" , controller.createPost); 
+
+module.exports = router;

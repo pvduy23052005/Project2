@@ -3,6 +3,7 @@ const product = require("../../model/product.model.js");
 const productHelper = require("../../helpers/products.js"); 
 const helperSearch = require("../../helpers/search.js");
 const helperPagination = require("../../helpers/pagination.js"); 
+const Product = require("../../model/product.model.js");
 
 module.exports.product = async (req, res) =>{
    // goi den phan bo loc ., 
@@ -110,4 +111,36 @@ module.exports.deleteItem = async ( req , res) => {
    await product.updateOne( { _id : id} , { hienThi : true}); 
    req.flash("thanhCong" , "Xoa thanh cong"); 
    res.redirect("back"); 
+}
+
+// [GET] /admin/product/create
+module.exports.createGet = ( req , res) => {
+
+   res.render( "admin/pages/products/create.pug"  , {
+      pagetitle : "Tao moi 1 san pham ", 
+   }); 
+}
+
+
+// [POST] /admin/product/create
+module.exports.createPost = async ( req , res) => {
+   // chuyen doi cac truong lai thanh so .
+   req.body.SoLuong = parseInt(req.body.SoLuong) ; 
+   req.body.gia = parseInt(req.body.gia) ; 
+   req.body.giam = parseInt(req.body.giam) ; 
+   if(req.body.position == ""){
+      req.body.position = await product.countDocuments() + 1;
+   }else {
+      req.body.position = parseInt(req.body.position) ; 
+   }
+
+   try {
+      const product = new Product(req.body); 
+      await product.save(); 
+      console.log("CAP NHAT THANH CONG"); 
+   } catch (error) {
+      console.log("Loi"); 
+   }
+
+   res.redirect("/admin/products"); 
 }

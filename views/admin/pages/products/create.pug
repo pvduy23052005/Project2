@@ -1,0 +1,89 @@
+extends ../../layout/default.pug
+
+block main 
+   form(
+      action="/admin/products/create",
+      method="POST"
+      ) 
+
+      div(class = "form-ground")
+         label(for="TenSanPham") tieu de 
+            input(
+               type="text"
+               id ="TenSanPham"
+               name = "TenSanPham"
+               required 
+               ) 
+
+      div(class = "form-ground")
+         label(for="SoLuong") So luong 
+            input(
+               type= "number" 
+               id ="SoLuong"
+               name = "SoLuong"
+               min = "0"
+               value = "0"
+               )
+
+      div(class = "form-ground")
+         label(for="hinhAnh") hinh anh  
+            input(
+               type= "text" 
+               id ="hinhAnh"
+               name = "hinhAnh"
+               )
+
+      div(class = "form-ground")
+         label(for="gia") gia 
+            input(
+               type= "number" 
+               id ="gia"
+               name = "gia"
+               min = "0"
+               )
+      
+      div(class = "form-ground")
+         label(for="giam") giam gia 
+            input(
+               type= "number" 
+               id ="giam"
+               name = "giam"
+               min = "0"
+               value = "0"
+               )
+
+      div( )
+         input(
+            type="radio"
+            name = "status"
+            value ="active"
+            id = "statusActive" 
+            checked                  
+            )
+         label(for="statusActive") Hoat dong
+      div( )
+         input(
+            type="radio"
+            name = "status"
+            value ="inactive"
+            id = "statusInactive"                   
+            )
+         label(for="statusInactive") Dung hoat dong 
+      
+      div()
+         label(for="position") Vi tri 
+            input(
+               type="text"
+               name = "position"
+               id = "position"
+               placeholder = "Tự động tăng"
+               min = "1"
+            ) 
+      div()
+         button( type = "submit") tao moi  
+
+
+            
+
+
+      
