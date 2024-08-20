@@ -1,4 +1,12 @@
 extends ../../layouts/default.pug
 
 block main 
-   h1 Trang san pham . 
+   h1 Danh sách sản phẩm
+   ul(class ="product")
+      each item in product
+         div(class = "khoi2")
+            li(class = "khoi") 
+               a(href = `/products/${item.slug}`) #{item.TenSanPham}
+               img(src =item.hinhAnh ,  alt="") 
+               button(class = "btn1")  $#{item.gia} -#{item.giam}%
+               button(class ="btn2")  $#{item.giaMoi}
