@@ -133,7 +133,11 @@ module.exports.createPost = async ( req , res) => {
    }else {
       req.body.position = parseInt(req.body.position) ; 
    }
-
+   // chen duong dan anh 
+   if( req.body.hinhAnh){
+      req.body.hinhAnh =  `/uploads/${req.file.filename}`;
+   }
+   
    try {
       const product = new Product(req.body); 
       await product.save(); 
@@ -142,5 +146,5 @@ module.exports.createPost = async ( req , res) => {
       console.log("Loi"); 
    }
 
-   res.redirect("/admin/products"); 
+   res.redirect("/admin/products");
 }

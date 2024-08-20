@@ -137,9 +137,10 @@ if(buttonDelete ){
 
 // tinh nang an hien . 
 const show = document.querySelector("[show-alert]");
+console.log(show); 
 if( show){
    // lay ve time 
-   const time = parseInt(show.getAttribute("time")); 
+   const time = parseInt(show.getAttribute("time"));
    // lay ve close-alert 
    const closeAlert = show.querySelector("[close-alert]"); 
    setTimeout(() => { 

@@ -1,9 +1,18 @@
 extends ../../layout/default.pug
 
 block main 
+
+   if( messages.error)
+      .info
+         div(
+            show-alert
+            time = 5000
+         ) #{messages.error} <span close-alert >X</span>
+
    form(
       action="/admin/products/create",
       method="POST"
+      enctype = "multipart/form-data"
       ) 
 
       div(class = "form-ground")
@@ -28,9 +37,10 @@ block main
       div(class = "form-ground")
          label(for="hinhAnh") hinh anh  
             input(
-               type= "text" 
+               type= "file" 
                id ="hinhAnh"
                name = "hinhAnh"
+               accept = "image/*"
                )
 
       div(class = "form-ground")
@@ -80,8 +90,10 @@ block main
                min = "1"
             ) 
       div()
-         button( type = "submit") tao moi  
+         button( type = "submit") tao moi
 
+   
+   script(src="/admin/js/product.js")
 
             
 
