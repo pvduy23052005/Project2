@@ -3,6 +3,8 @@ const methodOverride = require('method-override');
 const appAdmin = require("./routes/admin/index.route.js"); 
 const mongoose = require("./config/database.js"); 
 const bodyParser = require("body-parser"); 
+const appClient = require("./routes/client/index.route.js"); 
+
 //Fash : HIEN THI THONG BAO CHO  
 const flash = require("express-flash"); 
 const  cookieParser = require("cookie-parser"); 
@@ -31,7 +33,10 @@ app.use(cookieParser("PHUNGVANDUY"));
 app.use(session({cookie:  { maxAge : 60000}})); 
 app.use(flash()); 
 
+// su dung app . 
 appAdmin(app); 
+appClient(app); 
+
 app.listen(port , () => {
    console.log(`Run sever ${port}`); 
 });
