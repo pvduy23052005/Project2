@@ -75,6 +75,8 @@ module.exports.changeMulti = async ( req , res) => {
    const type = req.body.type ; 
    const listId  = req.body.ids.split(", ");  
 
+   console.log(type); 
+
    switch (type) {
       case "active":
          await product.updateMany({ _id: { $in: listId } }, { status: "active" });
@@ -83,6 +85,7 @@ module.exports.changeMulti = async ( req , res) => {
       case "inactive": 
          await product.updateMany({ _id: { $in: listId } }, { status: "inactive" });
          req.flash("thanhCong" , "Cap nhat Thanh cong"); 
+         break ; 
       case "delete-item" : 
          await product.updateMany( { _id: { $in: listId } }, { hienThi: true } );
          req.flash("thanhCong" , "Xoa thanh cong "); 
@@ -120,7 +123,6 @@ module.exports.createGet = ( req , res) => {
       pagetitle : "Tao moi 1 san pham ", 
    }); 
 }
-
 
 // [POST] /admin/product/create
 module.exports.createPost = async ( req , res) => {
@@ -168,7 +170,7 @@ module.exports.editGet = async ( req , res) => {
    }
 }
 
-// [PATCH] . 
+// [PATCH] /admin/product/edit/:id
 module.exports.editPatch = async ( req , res) => { 
    req.body.gia = parseInt(req.body.gia); 
    req.body.giam = parseInt(req.body.giam); 
@@ -188,4 +190,3 @@ module.exports.editPatch = async ( req , res) => {
 
    res.redirect("back"); 
 }
-

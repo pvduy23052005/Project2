@@ -1,0 +1,29 @@
+extend ../../layouts/default.pug
+
+block main 
+   h1( class = "" ) Chi tiết sản phẩm 
+
+   if(product)
+      if( product.TenSanPham )
+         h2( class = "mb-4") #{product.TenSanPham}
+
+      if(product.SoLuong)
+         div() So luong : #{product.SoLuong}
+
+      if(product.hinhAnh)
+         img(src=product.hinhAnh, 
+            alt=""
+            width = "100px"
+            height = "100px"
+         )
+
+      if(product.gia) 
+         div() Gia ban : #{product.gia}
+
+      if( product.giam)
+         div() Giam : #{product.giam} %
+
+      if( product.position)
+         div() Vi tri :  #{product.position}
+   else 
+      h1 San pham ko ton tai slug .  
