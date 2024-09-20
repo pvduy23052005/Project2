@@ -9,15 +9,17 @@ const appClient = require("./routes/client/index.route.js");
 const flash = require("express-flash"); 
 const  cookieParser = require("cookie-parser"); 
 const session = require("express-session"); 
-
 require("dotenv").config();  
-
 
 const app = express(); 
 const port = process.env.PORT;
 
 // goi de file ket noi database . 
 mongoose.connect(); 
+
+// su dung cho folder views . 
+app.set("views", `${__dirname}/views`);
+app.set("view engine" , "pug"); 
 
 // Cấu hình body-parser
 app.use(bodyParser.urlencoded({ extended: true }));
