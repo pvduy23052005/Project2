@@ -23,7 +23,7 @@ mongoose.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // cap quyen cho foder public . 
-app.use(express.static("public")); 
+app.use(express.static(`${__dirname}/public`)); 
 
 // cau hinh cho method-override . 
 app.use(methodOverride('_method')); 
@@ -38,5 +38,5 @@ appAdmin(app);
 appClient(app); 
 
 app.listen(port , () => {
-   console.log(`Run sever ${port}`); 
+   console.log(`Run sever ${port}`);
 });
