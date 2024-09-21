@@ -58,7 +58,7 @@ module.exports.changeStatus = async (req , res) =>{
    // lay ve id on url . 
    const id = req.params.id; 
    //lay ve status on url . 
-   const status = req.params.status; 
+   const status = req.params.status;
    
    try {
       // su ham updateOne
@@ -120,14 +120,14 @@ module.exports.deleteItem = async ( req , res) => {
 module.exports.createGet = ( req , res) => {
 
    res.render( "admin/pages/products/create.pug"  , {
-      pagetitle : "Tao moi 1 san pham ", 
+      pageTitle : "Tao moi 1 san pham ", 
    }); 
 }
 
 // [POST] /admin/product/create
 module.exports.createPost = async ( req , res) => {
    // chuyen doi cac truong lai thanh so .
-   req.body.SoLuong = parseInt(req.body.SoLuong) ; 
+   req.body.SoLuong = parseInt(req.body.SoLuong); 
    req.body.gia = parseInt(req.body.gia) ; 
    req.body.giam = parseInt(req.body.giam) ; 
    if(req.body.position == ""){
@@ -135,17 +135,13 @@ module.exports.createPost = async ( req , res) => {
    }else {
       req.body.position = parseInt(req.body.position) ; 
    }
-   // chen duong dan anh 
-   if( req.body.hinhAnh){
-      req.body.hinhAnh =  `/uploads/${req.file.filename}`;
-   }
 
    try {
       const product = new Product(req.body); 
       await product.save(); 
       console.log("CAP NHAT THANH CONG"); 
    } catch (error) {
-      console.log("Loi"); 
+      console.log("Loi");
    }
 
    res.redirect("/admin/products");
@@ -177,10 +173,6 @@ module.exports.editPatch = async ( req , res) => {
    req.body.soLuong = parseInt(req.body.soLuong);
    req.body.position = parseInt(req.body.position);
 
-   if(req.file){
-      // update anh . => database .  ( req.file). 
-   req.body.hinhAnh =  `/uploads/${req.file.filename}`;  
-   }
 
    try {
       await product.updateOne({ _id : req.params.id} , req.body);  
